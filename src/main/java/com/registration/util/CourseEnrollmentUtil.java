@@ -21,6 +21,6 @@ public class CourseEnrollmentUtil {
 	
 	public static final String STATUS_FAILURE="Failed";
 	
-	public static final String GET_ALL_COURSE_URI="";
+	public static final String GET_ALL_COURSE_URI="http://localhost:8090/course-api/api/courses/courseIds";
 
 }

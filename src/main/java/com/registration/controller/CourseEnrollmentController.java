@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.registration.dto.CourseEnrollmentRequestDto;
 import com.registration.dto.CourseEnrollmentResponseDto;
+import com.registration.dto.EnrolledCourseDto;
 import com.registration.dto.EnrolledCourseResponseDto;
 import com.registration.service.CourseEnrollmentService;
 
@@ -56,6 +57,18 @@ public class CourseEnrollmentController {
 		
 		LOGGER.info("CourseController :: getAllEnrolledCourse --- ");
 		List<EnrolledCourseResponseDto> response  =courseEnrollmentService.getAllEnrolledCourse(registrationId);
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+	/**
+	 * This method is use to get enrolled course of registered user
+	 * @param registrationId,not null
+	 * @return List<EnrolledCourseDto>, not null
+	 */
+	@GetMapping("/courses/{registrationId}")
+	public ResponseEntity<List<EnrolledCourseDto>> getEnrolledCourse(@PathVariable Integer registrationId){
+		
+		LOGGER.info("CourseController :: getEnrolledCourse --- ");
+		List<EnrolledCourseDto> response  =courseEnrollmentService.getEnrolledCourse(registrationId);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 

@@ -15,5 +15,5 @@ public class EnrolledCourseResponseDto {
 	private String courseName;
 	private int courseDuration;
 	private double courseFee;
-	private String details;
+	private String description;
 }
