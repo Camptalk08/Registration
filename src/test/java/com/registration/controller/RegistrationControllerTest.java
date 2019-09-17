@@ -13,34 +13,31 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import com.registration.dto.RegistrationResponseDTO;
 import com.registration.service.RegistrationService;
 
+@RunWith(MockitoJUnitRunner.class)
+@WebAppConfiguration
+public class RegistrationControllerTest {
 
+	private MockMvc mockMvc;
 
-	@RunWith(MockitoJUnitRunner.class)
-	@WebAppConfiguration
-	public class RegistrationControllerTest {
+	@InjectMocks
+	RegistrationController registrationController;
 
-		private MockMvc mockMvc;
+	@Mock
+	RegistrationService registrationService;
 
-		@InjectMocks
-		RegistrationController registrationController;
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+		this.mockMvc = MockMvcBuilders.standaloneSetup(registrationController).build();
+	}
 
-		@Mock
-		RegistrationService registrationService;
+	public RegistrationResponseDTO registerTests() {
+		RegistrationResponseDTO registrationResponseDTO = new RegistrationResponseDTO();
+		registrationResponseDTO.setMessage("SUCCESS");
+		registrationResponseDTO.setRegistrationId(1);
+		registrationResponseDTO.setStatus("Success");
 
-		@Before
-		public void setup() {
-			MockitoAnnotations.initMocks(this);
-			this.mockMvc = MockMvcBuilders.standaloneSetup(registrationController).build();
-		}
-
-		public RegistrationResponseDTO registerTests() {
-			RegistrationResponseDTO  registrationResponseDTO= new RegistrationResponseDTO();
-			registrationResponseDTO.setMessage("SUCCESS");
-			registrationResponseDTO.setRegistrationId(1);
-			registrationResponseDTO.setStatus("Success");
-			
-			
-			return registrationResponseDTO;
-		}
+		return registrationResponseDTO;
+	}
 
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.registration.util.CourseEnrollmentUtil;
 import com.registration.util.RegistrationUtil;
 
 @ControllerAdvice
@@ -47,5 +48,23 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 			errors.put(fieldName, errorMessage1);
 		});
 		return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(CourseAlreadyExistException.class)
+	public ResponseEntity<ErrorResponse> courseAlreadyExistExceptionHandler(CourseAlreadyExistException exception)
+	{
+		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), exception.getMessage(),
+				CourseEnrollmentUtil.STATUS_FAILURE);
+
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(NoAnyCourseEnrollException.class)
+	public ResponseEntity<ErrorResponse> noAnyCourseEnrollExceptionHandler(NoAnyCourseEnrollException exception)
+	{
+		ErrorResponse errorResponse = new ErrorResponse(LocalDate.now(), exception.getMessage(),
+				CourseEnrollmentUtil.STATUS_FAILURE);
+
+		return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
 	}
 }
