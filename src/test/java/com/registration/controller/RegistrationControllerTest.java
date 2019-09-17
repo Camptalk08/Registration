@@ -3,6 +3,7 @@ package com.registration.controller;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,6 +31,7 @@ public class RegistrationControllerTest {
 	@InjectMocks
 	RegistrationController registrationController;
 
+
 	@Mock
 	RegistrationService registrationService;
 	RegistrationRequestDTO registrationRequestDTO;
@@ -54,12 +56,12 @@ public class RegistrationControllerTest {
 	}
 
 	@Test
-	public void getLeaveHistoryController() {
-		ResponseEntity<RegistrationResponseDTO> expResult = new ResponseEntity<>(registerTests(), HttpStatus.OK);
+	public void registerTest() {
+		ResponseEntity<RegistrationResponseDTO> expResult = new ResponseEntity<>(registerTests(), HttpStatus.CREATED);
 		when(registrationService.register(Mockito.any())).thenReturn(registerTests());
 		ResponseEntity<RegistrationResponseDTO> actResult = registrationController.register(registrationRequestDTO);
 		assertEquals(201, actResult.getStatusCode().value());
 		assertEquals(expResult.getBody().getRegistrationId(), actResult.getBody().getRegistrationId());
-	}
 
+	}
 }

@@ -12,6 +12,4 @@ public class ResponseDto {
 	private Long regId;
 	private String email;
 	private String password;
-	
-
 }
