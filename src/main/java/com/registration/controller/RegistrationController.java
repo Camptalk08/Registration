@@ -1,5 +1,7 @@
 package com.registration.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +31,7 @@ public class RegistrationController {
 	 * null @return RegistrationResponseDTO,not null @exception
 	 */
 	@PostMapping("/users")
-	public ResponseEntity<RegistrationResponseDTO> register(
+	public ResponseEntity<RegistrationResponseDTO> register(@Valid
 			@RequestBody RegistrationRequestDTO registrationRequestDTO) {
 		log.info("Inside register method of RegistrationController class");
 		RegistrationResponseDTO response = registrationService.register(registrationRequestDTO);
